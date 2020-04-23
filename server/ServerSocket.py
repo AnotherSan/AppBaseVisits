@@ -30,9 +30,7 @@ def add_to_table(table_number):
     values = ()
     if table_number == 1:
         time = get_data("Time\n> ")
-        try_convert(time)
         date = get_data("Date\n> ")
-        try_convert(date)
         type = get_data("Type\n> ")
         number = get_data("Number\n> ")
         try_convert(number)
@@ -103,9 +101,7 @@ def update_table(table_number):
     try_convert(number)
     if table_number == 1:
         time = get_data("Time\n> ")
-        try_convert(time)
         date = get_data("Date\n> ")
-        try_convert(date)
         type = get_data("Type\n> ")
         new_number = get_data("Number\n> ")
         try_convert(new_number)
