@@ -6,7 +6,7 @@ from Functions import InsertLate
 from Functions import UpdateLate
 from Functions import DeleteL
 from Functions import SearchL
-
+#Сигналы от кнопок
 def insert(index):
     if index == 0:
         dlg = InsertDialog.InsertDialog()

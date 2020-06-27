@@ -3,7 +3,7 @@ from PyQt5.QtGui import *
 import sqlite3
 from Functions import GuiSignal
 from Gui import GuiTab
-
+#Gui основного окна
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
@@ -11,7 +11,6 @@ class MainWindow(QMainWindow):
         self.c = self.conn.cursor()
         self.c.execute("CREATE TABLE IF NOT EXISTS Workers(roll INTEGER PRIMARY KEY AUTOINCREMENT ,name TEXT,branch TEXT,sem INTEGER,mobile INTEGER,address TEXT)")
         self.c.execute("CREATE TABLE IF NOT EXISTS Late(roll INTEGER PRIMARY KEY AUTOINCREMENT ,name TEXT,count INTEGER)")
-        self.c.execute("CREATE TABLE IF NOT EXISTS Rulls(Time_UP INTEGER,Time_Down INTEGER)")
         self.c.close()
         self.setWindowIcon(QIcon("icon/document.png"))
         self.setWindowTitle("Контроль посещений")
@@ -24,28 +23,32 @@ class MainWindow(QMainWindow):
         self.addToolBar(toolbar)
         statusbar = QStatusBar()
         self.setStatusBar(statusbar)
-
+#Панель кнопок
         btn_ac_adduser = QAction(QIcon("icon/add.png"), "Добавить", self)
         btn_ac_adduser.triggered.connect(lambda: GuiSignal.insert(self.table_widget.tabs.currentIndex()))
         btn_ac_adduser.setStatusTip("Добавить")
         toolbar.addAction(btn_ac_adduser)
+
         btn_ac_refresh = QAction(QIcon("icon/refresh.png"),"Обновить",self)
         btn_ac_refresh.triggered.connect(lambda: self.loaddata(self.table_widget.tabs.currentIndex()))
         btn_ac_refresh.setStatusTip("Обновить")
         toolbar.addAction(btn_ac_refresh)
+
         btn_ac_search = QAction(QIcon("icon/search.png"), "Поиск", self)
         btn_ac_search.triggered.connect(lambda: GuiSignal.search(self.table_widget.tabs.currentIndex()))
         btn_ac_search.setStatusTip("Поиск")
         toolbar.addAction(btn_ac_search)
+
         btn_ac_delete = QAction(QIcon("icon/trash.png"), "Удалить", self)
         btn_ac_delete.triggered.connect(lambda: GuiSignal.delete(self.table_widget.tabs.currentIndex()))
         btn_ac_delete.setStatusTip("Удалить")
         toolbar.addAction(btn_ac_delete)
+
         btn_ac_update = QAction(QIcon("icon/update.png"), "Редактировать", self)
         btn_ac_update.triggered.connect(lambda: GuiSignal.updateTable(self.table_widget.tabs.currentIndex()))
         btn_ac_update.setStatusTip("Редактировать")
         toolbar.addAction(btn_ac_update)
-
+#Подгрузка данных с таблицы
     def loaddata(self, index):
         if index == 0:
             self.connection = sqlite3.connect("database.db")
@@ -68,7 +71,7 @@ class MainWindow(QMainWindow):
                     self.table_widget.tableWidget1.setItem(row_number, column_number, QTableWidgetItem(str(data)))
             self.connection.close()
 
-
+#Отрисовка таблица
     def handlePaintRequest(self, printer):
         document = QTextDocument()
         cursor = QTextCursor(document)

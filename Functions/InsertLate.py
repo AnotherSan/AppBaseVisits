@@ -12,10 +12,12 @@ class InsertLate(QDialog):
         self.setFixedWidth(300)
         self.setFixedHeight(250)
         self.QBtn.clicked.connect(self.addWorker)
+
         layout = QVBoxLayout()
         self.nameinput = QLineEdit()
         self.nameinput.setPlaceholderText("Имя")
         layout.addWidget(self.nameinput)
+
         self.countinput = QLineEdit()
         self.countinput.setPlaceholderText("Колличество")
         layout.addWidget(self.countinput)
@@ -25,6 +27,7 @@ class InsertLate(QDialog):
     def addWorker(self):
         name = self.nameinput.text()
         count=self.countinput.text()
+
         try:
             self.conn = sqlite3.connect("database.db")
             self.c = self.conn.cursor()

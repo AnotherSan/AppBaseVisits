@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import sqlite3
-
+#Gui диалога
 class DeleteDialog(QDialog):
     def __init__(self, *args, **kwargs):
         super(DeleteDialog, self).__init__(*args, **kwargs)
@@ -21,7 +21,7 @@ class DeleteDialog(QDialog):
         layout.addWidget(self.deleteinput)
         layout.addWidget(self.QBtn)
         self.setLayout(layout)
-
+#Сам функционал кнопки
     def deleteWorker(self):
         delrol = self.deleteinput.text()
         try:
